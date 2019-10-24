@@ -18,13 +18,13 @@ BMPImage *readBin(char *filename){
     BMPImage *image = malloc(sizeof(*image));
 
     // Read header
-    int num_read = fread(&image->header, sizeof(image->header), 1, fp);
+    fread(&image->header, sizeof(image->header), 1, fp);
 
     // Allocate memory for image data
     image->data = malloc(sizeof(*image->data) * image->header.image_size_bytes);
 
     // Read image data
-    num_read = fread(image->data, image->header.image_size_bytes, 1, fp);
+    fread(image->data, image->header.image_size_bytes, 1, fp);
 
     fclose(fp);
 
@@ -35,10 +35,10 @@ BMPImage *readBin(char *filename){
 void writeBin(char *filename, BMPImage *image){
   FILE *fp = fopen(filename, "wb");
 
-  int num_read = fwrite(&image->header, sizeof(image->header), 1, fp);
+  fwrite(&image->header, sizeof(image->header), 1, fp);
 
   // Write image data
-  num_read = fwrite(image->data, image->header.image_size_bytes, 1, fp);
+  fwrite(image->data, image->header.image_size_bytes, 1, fp);
 
   fclose(fp);
 

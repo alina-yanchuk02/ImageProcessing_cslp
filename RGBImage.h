@@ -1,8 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#ifndef IMAGE
-#define IMAGE
+#ifndef IMAGERGB
+#define IMAGERGB
 
 typedef struct {
      unsigned char red,green,blue;

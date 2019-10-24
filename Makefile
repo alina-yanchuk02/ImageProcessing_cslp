@@ -1,2 +1,2 @@
-Imagem: exemplo.c teste.c
-	gcc -o greyscale exemplo.c teste.c -I.
+Imagem: test.c
+	gcc -o teste test.c RGBImage.c greyImage.c binImage.c

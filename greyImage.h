@@ -1,9 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "binImage.h"
 
-#ifndef IMAGE
-#define IMAGE
+
+#ifndef IMAGEGREY
+#define IMAGEGREY
 
 
 typedef struct {
@@ -20,11 +20,11 @@ typedef struct {
 
 } GreyImage;
 
-greyPixel getGreyPixel(ImageGrey *ImageGrey,int x, int y);
-BMPImage *from_grey_to_bin(GreyImage *greyImage);
-BMPImage *intensityFilterGrey(GreyImage *greyImage, int intensity);
-
 GreyImage *readGrey(char *filename);
 void writeGrey(char *filename, GreyImage *img);
+greyPixel getGreyPixel(GreyImage *GreyImage,int x, int y);
+//BMPImage *from_grey_to_bin(GreyImage *greyImage);
+GreyImage *intensityFilterGrey(GreyImage *greyImage, int intensity);
+
 
 #endif
