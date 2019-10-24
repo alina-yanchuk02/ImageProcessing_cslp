@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include "binImage.h"
 
 #ifndef IMAGE
 #define IMAGE
@@ -18,5 +19,8 @@ typedef struct {
 
 } GreyImage;
 
+greyPixel getGreyPixel(ImageGrey *ImageGrey,int x, int y);
+BMPImage *from_grey_to_bin(GreyImage *greyImage);
+BMPImage *intensityFilterGrey(GreyImage *greyImage, int intensity);
 
 #endif

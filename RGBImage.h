@@ -18,5 +18,7 @@ typedef struct {
 
 ImageRGB *readRGB(char *filename);
 void writeRGB(char *filename, ImageRGB *img);
+colorPixel getPixelRGB(ImageRGB *imageRGB,int x, int y);
+ImageRGB *intensityFilterRGB(ImageRGB *imageRGB, int percentagem);
 
 #endif

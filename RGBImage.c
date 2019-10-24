@@ -60,3 +60,34 @@ void writeRGB(char *filename, ImageRGB *img)
 
     fclose(fp);
 }
+
+colorPixel getPixelRGB(ImageRGB *imageRGB,int x, int y){
+  if (x < 0 || x > imageRGB->width || y < 0 || y > imageRGB->height){
+    printf("Coordenadas incorretas!\n");
+    exit(0);
+  }
+  int position = ((imageRGB->width-1) * y + x)-1;
+  return imageRGB->pixels[position];
+}
+
+ImageRGB *intensityFilterRGB(ImageRGB *imageRGB, int intensity){
+  for (int i = 0 ; i < imageRGB->height * imageRGB->width; i++){
+    //red
+    int red = imageRGB->pixels[i].red + intensity;
+    if (red < 0) {imageRGB->pixels[i].red = 0;}
+    else if (red > 255) {imageRGB->pixels[i].red = 255;}
+    else{imageRGB->pixels[i].red=red;}
+    //green
+    int green = imageRGB->pixels[i].green + intensity;
+    if (green < 0) {imageRGB->pixels[i].green = 0;}
+    else if (green > 255) {imageRGB->pixels[i].green = 255;}
+    else{imageRGB->pixels[i].green=green;}
+    //blue
+    int blue = imageRGB->pixels[i].blue + intensity;
+    if (blue < 0) {imageRGB->pixels[i].blue = 0;}
+    else if (blue > 255) {imageRGB->pixels[i].blue = 255;}
+    else{imageRGB->pixels[i].blue=blue;}
+  }
+
+    return imageRGB;
+}
