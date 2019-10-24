@@ -1,7 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 //#include "RGBImage.h"
-#include "binImage.h"
+//#include "binImage.h"
+#include "greyImage.h"
 
 int main(void){
 
@@ -9,9 +10,14 @@ int main(void){
   image = readRGB("lena.ppm");
   writeRGB("resultadoRGB.ppm",image);*/
 
-  BMPImage *image;
-  image = readBin("LAND3.BMP");
-  writeBin("resultadoBIN.bmp", image);
+  //BMPImage *image;
+  //image = readBin("LAND3.BMP");
+  //writeBin("resultadoBIN.bmp", image);
 
+
+  GreyImage *image;
+  image=readPGM("baboon.pgm");
+  writePGM("resultadoGrey.pgm",image);
+  
   return 0;
 }

@@ -14,9 +14,13 @@ typedef struct {
 
     int  height;
     int width;
+    int max_grey;
     greyPixel *pixels;
 
 } GreyImage;
 
+
+GreyImage *readGrey(char *filename);
+void writeGrey(char *filename, GreyImage *img);
 
 #endif
