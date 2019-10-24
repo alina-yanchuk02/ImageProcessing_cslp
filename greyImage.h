@@ -15,6 +15,7 @@ typedef struct {
 
     int  height;
     int width;
+    int max_grey;
     greyPixel *pixels;
 
 } GreyImage;
@@ -22,5 +23,8 @@ typedef struct {
 greyPixel getGreyPixel(ImageGrey *ImageGrey,int x, int y);
 BMPImage *from_grey_to_bin(GreyImage *greyImage);
 BMPImage *intensityFilterGrey(GreyImage *greyImage, int intensity);
+
+GreyImage *readGrey(char *filename);
+void writeGrey(char *filename, GreyImage *img);
 
 #endif

@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "RGBImage.h"
-
+#include "greyImage.h"
 #define RGB 255
 
 
@@ -41,6 +41,8 @@ ImageRGB *readRGB(char *filename)
 }
 
 
+
+
 void writeRGB(char *filename, ImageRGB *img)
 {
     FILE *fp;
@@ -61,6 +63,7 @@ void writeRGB(char *filename, ImageRGB *img)
     fclose(fp);
 }
 
+<<<<<<< HEAD
 colorPixel getPixelRGB(ImageRGB *imageRGB,int x, int y){
   if (x < 0 || x > imageRGB->width || y < 0 || y > imageRGB->height){
     printf("Coordenadas incorretas!\n");
@@ -91,3 +94,19 @@ ImageRGB *intensityFilterRGB(ImageRGB *imageRGB, int intensity){
 
     return imageRGB;
 }
+=======
+
+
+GreyImage *from_rgb_to_grey(ImageRGB *img){
+
+    for (i = 0; i < img->height; i++) { 
+        for (j = 0; j < img->width; j++) { 
+            temp = img->pixels[i][j]; 
+            temp = (temp*3) / 3;
+
+            
+        } 
+         
+    } 
+}
+>>>>>>> 28d209257dbc050167cf6b411b70588f7f1b60e5
