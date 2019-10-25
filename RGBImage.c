@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "RGBImage.h"
+#include "greyImage.h"
 #define RGB 255
 
 
@@ -94,3 +95,25 @@ ImageRGB *intensityFilterRGB(ImageRGB *imageRGB, int intensity){
 
     return imageRGB;
 }
+
+GreyImage *from_rgb_to_grey(ImageRGB *rgbimg){
+  
+  GreyImage *greyimg;
+  greyimg = (GreyImage*)malloc(sizeof(GreyImage));
+  greyimg->pixels = (greyPixel*)malloc(rgbimg->width * rgbimg->height * sizeof(greyPixel));
+  greyimg->width = rgbimg->width;
+  greyimg->height = rgbimg->height;
+  greyimg->max_grey=255;
+  for (int i = 0 ; i < rgbimg->height * rgbimg->width; i++){
+    int red = rgbimg->pixels[i].red;
+    int green = rgbimg->pixels[i].green;
+    int blue = rgbimg->pixels[i].blue;
+    int grey = 0.2126*red + 0.7152*green + 0.0722*blue;
+    greyimg->pixels[i].grey=grey+0.5;
+  }
+  return greyimg;
+
+
+}
+
+

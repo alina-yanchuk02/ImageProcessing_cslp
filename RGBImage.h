@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-
+#include "greyImage.h"
 #ifndef IMAGERGB
 #define IMAGERGB
 
@@ -20,5 +20,6 @@ ImageRGB *readRGB(char *filename);
 void writeRGB(char *filename, ImageRGB *img);
 colorPixel getPixelRGB(ImageRGB *imageRGB,int x, int y);
 ImageRGB *intensityFilterRGB(ImageRGB *imageRGB, int percentagem);
+GreyImage *from_rgb_to_grey(ImageRGB *RGBimg);
 
 #endif
