@@ -1,4 +1,5 @@
 
+
 #include <stdio.h>
 #include <stdlib.h>
 #include "RGBImage.h"
@@ -68,7 +69,7 @@ int getPixelRGB(ImageRGB *imageRGB,int x, int y, int l){
   if (x < 0 || x > imageRGB->width || y < 0 || y > imageRGB->height){
     return 0;
   }
-  int position = (y * imageRGB->width) + x;
+  int position = ((imageRGB->width-1) * y + x)-1;
   if (l==0){
     return imageRGB->pixels[position].red;}
   if (l==1){
@@ -122,12 +123,11 @@ GreyImage *from_rgb_to_grey(ImageRGB *rgbimg){
 }
 
 
-void *put_pixel_unsafe(ImageRGB *img,int x,int y,int red,int green,int blue){
-    unsigned int ofs;
-    ofs = (y * img->width) + x;
-    img->pixels[ofs].red = red;
-    img->pixels[ofs].green = green;
-    img->pixels[ofs].blue = blue;
+void *change_pixel(ImageRGB *img,int x,int y,int red,int green,int blue){
+    int position = ((img->width-1) * y + x)-1;
+    img->pixels[position].red = red;
+    img->pixels[position].green = green;
+    img->pixels[position].blue = blue;
 }
 
 
@@ -157,12 +157,19 @@ ImageRGB *filter_rgb(ImageRGB *img, double *K, int Ks, double divisor, double of
           }
         }
       }
-      for(l=0; l<3; l++)
-        cp[l] = (cp[l]>255.0) ? 255.0 : ((cp[l]<0.0) ? 0.0 : cp[l]) ;
-      put_pixel_unsafe(img_filtered, ix, iy, (int)cp[0], (int)cp[1], (int)cp[2]);
-      
+      for(l=0; l<3; l++){
+        cp[l] = (cp[l]>255.0) ? 255.0 : ((cp[l]<0.0) ? 0.0 : cp[l]);
+        if (cp[l]>255) {cp[l]=255.0;}
+        else if (cp[l]<0.0) {cp[l]=0.0;}
+        else {cp[l]=cp[l];}
+      }
+
+      change_pixel(img_filtered, ix, iy, (int)cp[0], (int)cp[1], (int)cp[2]);
+        
     }
   }
   return img_filtered;
 }
+
+
 
