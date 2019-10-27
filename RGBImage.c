@@ -64,13 +64,18 @@ void writeRGB(char *filename, ImageRGB *img)
 }
 
 
-colorPixel getPixelRGB(ImageRGB *imageRGB,int x, int y){
+int getPixelRGB(ImageRGB *imageRGB,int x, int y, int l){
   if (x < 0 || x > imageRGB->width || y < 0 || y > imageRGB->height){
-    printf("Coordenadas incorretas!\n");
-    exit(0);
+    return 0;
   }
-  int position = ((imageRGB->width-1) * y + x)-1;
-  return imageRGB->pixels[position];
+  int position = (y * imageRGB->width) + x;
+  if (l==0){
+    return imageRGB->pixels[position].red;}
+  if (l==1){
+    return imageRGB->pixels[position].green;}
+  if (l==2){
+    return imageRGB->pixels[position].blue;}
+
 }
 
 
@@ -116,4 +121,48 @@ GreyImage *from_rgb_to_grey(ImageRGB *rgbimg){
 
 }
 
+
+void *put_pixel_unsafe(ImageRGB *img,int x,int y,int red,int green,int blue){
+    unsigned int ofs;
+    ofs = (y * img->width) + x;
+    img->pixels[ofs].red = red;
+    img->pixels[ofs].green = green;
+    img->pixels[ofs].blue = blue;
+}
+
+
+
+ImageRGB *filter_rgb(ImageRGB *img, double *K, int Ks, double divisor, double offset){
+
+  ImageRGB *img_filtered;
+  unsigned int ix, iy, l;
+  
+  int kx, ky;
+  double cp[3];
+  int pixel_red,pixel_green,pixel_blue;
+
+  img_filtered = (ImageRGB*)malloc(sizeof(ImageRGB));
+  img_filtered->width = img->width;
+  img_filtered->height = img->height;
+  img_filtered->pixels = (colorPixel*)malloc(img->width * img->height * sizeof(colorPixel));
+  
+  for(ix=0; ix < img->width; ix++) {
+    for(iy=0; iy < img->height; iy++) {
+      
+      cp[0] = cp[1] = cp[2] = 0.0;
+      for(kx=-Ks; kx <= Ks; kx++) {
+        for(ky=-Ks; ky <= Ks; ky++) {
+          for(l=0; l<3; l++){
+	          cp[l] += (K[(kx+Ks) + (ky+Ks)*(2*Ks+1)]/divisor) *((double)getPixelRGB(img,ix+kx,iy+ky,l)) + offset;
+          }
+        }
+      }
+      for(l=0; l<3; l++)
+        cp[l] = (cp[l]>255.0) ? 255.0 : ((cp[l]<0.0) ? 0.0 : cp[l]) ;
+      put_pixel_unsafe(img_filtered, ix, iy, (int)cp[0], (int)cp[1], (int)cp[2]);
+      
+    }
+  }
+  return img_filtered;
+}
 
