@@ -24,7 +24,8 @@ int getPixelRGB(ImageRGB *imageRGB,int x, int y,int l);
 ImageRGB *intensityFilterRGB(ImageRGB *imageRGB, int percentagem);
 GreyImage *from_rgb_to_grey(ImageRGB *RGBimg);
 ImageRGB *filter_rgb(ImageRGB *img,double *K, int Ks, double divisor, double offset);
-void *put_pixel_unsafe(ImageRGB *img,int x,int y,int red,int green,int blue);
+void *changepixelRGB(ImageRGB *img,int x,int y,int red,int green,int blue);
+
 
 #endif
 

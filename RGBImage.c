@@ -123,7 +123,7 @@ GreyImage *from_rgb_to_grey(ImageRGB *rgbimg){
 }
 
 
-void *change_pixel(ImageRGB *img,int x,int y,int red,int green,int blue){
+void *change_pixelRGB(ImageRGB *img,int x,int y,int red,int green,int blue){
     int position = ((img->width-1) * y + x)-1;
     img->pixels[position].red = red;
     img->pixels[position].green = green;
@@ -158,13 +158,13 @@ ImageRGB *filter_rgb(ImageRGB *img, double *K, int Ks, double divisor, double of
         }
       }
       for(l=0; l<3; l++){
-        cp[l] = (cp[l]>255.0) ? 255.0 : ((cp[l]<0.0) ? 0.0 : cp[l]);
+        
         if (cp[l]>255) {cp[l]=255.0;}
         else if (cp[l]<0.0) {cp[l]=0.0;}
         else {cp[l]=cp[l];}
       }
 
-      change_pixel(img_filtered, ix, iy, (int)cp[0], (int)cp[1], (int)cp[2]);
+      change_pixelRGB(img_filtered, ix, iy, (int)cp[0], (int)cp[1], (int)cp[2]);
         
     }
   }
