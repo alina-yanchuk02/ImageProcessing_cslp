@@ -1,3 +1,16 @@
+/**
+ *  \file test.c
+ *
+ *  \brief Problem name: Image processing in C
+ *
+ *  Menu
+ *
+ *  \author Alina Yanchuk
+ *  \author Sandra Andrade
+ */
+
+
+
 #include <stdio.h>
 #include <stdlib.h>
 #include "RGBImage.h"
@@ -10,29 +23,15 @@ int main(void){
 
 
 
-
-  //GreyImage *imagegrey;
-  //imagegrey=readGrey("baboon.pgm");
-  //imagegrey=intensityFilterGrey(imagegrey,100);
-  //writeGrey("resultadoGreyintensaty.pgm",imagegrey);
-
-
-  //BMPImage *imagebin;
-  //imagebin = readBin("LAND3.BMP");
-  //writeBin("resultadoBIN.bmp", imagebin);
-
-  /*ImageRGB *imageA = readRGB("falls_1.ppm");
-  ImageRGB *imageB = readRGB("falls_2.ppm");
-  ImageRGB *water = watermark(imageA,imageB,0.5);
-  writeRGB("resultado_watermark.ppm",water);
-*/
-
-
-
   int escolha_tipo=1;
   int opera=1;
   char nome[40];
+  char nome2[400];
   int intensidade;
+
+  double edge_kernel[3*3] = {-1.0, 0.0, 1.0, -2.0, 0.0, 2.0, -1.0, 0.0, 1.0};
+  double blur_kernel[3*3] = {1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0};
+  const double filter_params[2*4] = {1.0, 0.0, 1.0, 0.0, 1.0, 0.5, 9.0, 0.0};
 
 
   while (escolha_tipo!=4){
@@ -42,7 +41,7 @@ int main(void){
   printf("\n Escolha o tipo de imagem com o qual quer trabalhar: ");
   printf("\n 1 - Imagem RGB (.ppm)");
   printf("\n 2 - Imagem GreyScale (.pgm) ");
-  printf("\n 3 - Imagem Binária ");
+  printf("\n 3 - Imagem Binária (.pbm)");
   printf("\n 4 - Sair ");
   printf("\n ->");
 
@@ -54,17 +53,19 @@ int main(void){
 
   case 1:{
     printf("\n------------------------------\n");
-    printf("\nIntroduza o nome da imagem que quer processar: (tem de ser do tipo .ppm) \n");
+    printf("\nIntroduza o nome da imagem que quer processar: (tem de ser do tipo .ppm)  Utilize:  falls_1.ppm \n");
     printf("->");
     scanf("%s",nome);
+    ImageRGB *imageA=readRGB(nome);
 
-    while(opera!=4){
+    while(opera!=5){
       printf("\n------------------------------\n");
       printf("\n Escolha a operação a realizar:");
       printf("\n 1 - Converter a imagem em Greyscale");
       printf("\n 2 - Mudar intensidade da imagem ");
       printf("\n 3 - Aplicar filtro ");
-      printf("\n 4 - Sair ");
+      printf("\n 4 - Aplicar marca de água ");
+      printf("\n 5 - Sair ");
       printf("\n ->");
       scanf("%d",&opera);
 
@@ -90,11 +91,9 @@ int main(void){
             break;
           }
           case 3:{
-            printf("\nForam aplicados dois filtros: Edge Detection e Blur! \n Os resultados foram criados em: rgb_filtered_edge.ppm e rgb_filtered_blur.ppm :D \n");
+            printf("\nForam aplicados dois filtros:\n -> Edge Detection\n -> Blur\n\nOs resultados foram criados em: rgb_filtered_edge.ppm e rgb_filtered_blur.ppm. \n");
 
-            double edge_kernel[3*3] = {-1.0, 0.0, 1.0, -2.0, 0.0, 2.0, -1.0, 0.0, 1.0};
-            double blur_kernel[3*3] = {1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0};
-            const double filter_params[2*4] = {1.0, 0.0, 1.0, 0.0, 1.0, 0.5, 9.0, 0.0};
+            
 
             ImageRGB *imagergb;
             ImageRGB *rgb_filtered_edge,*rgb_filtered_blur;
@@ -106,6 +105,19 @@ int main(void){
             break;
           }
           case 4:{
+            printf("\nIntroduza o nome da imagem a sobrepôr (tem de ser do mesmo tamanho da primeira! Utilize: falls_2.ppm)\n");
+            printf("->\n");
+            scanf("%s",nome2);
+            ImageRGB *imageB = readRGB(nome2);
+              
+            ImageRGB *water = watermark(imageA,imageB,0.5);
+              
+            writeRGB("resultado_watermark.ppm",water);
+            printf("\nO resultado foi publicado em resultado_watermark.ppm.\n");
+            break;
+          }
+
+          case 5:{
             exit(1);
           }
         }
@@ -116,18 +128,20 @@ int main(void){
 
   case 2:{
     printf("\n------------------------------\n");
-    printf("\nIntroduza o nome da imagem que quer processar: (tem de ser do tipo .pgm) \n");
+    printf("\nIntroduza o nome da imagem que quer processar: (tem de ser do tipo .pgm) Utilize: baboon.pgm \n");
     printf("->");
     scanf("%s",nome);
     while(opera!=4){
-      printf("\n Escolha a operação a realizar   -> ");
+      printf("\n Escolha a operação a realizar: ");
       printf("\n 1 - Converter a imagem em Binária");
       printf("\n 2 - Mudar intensidade da imagem ");
       printf("\n 3 - Aplicar filtro ");
+      printf("\n 4 - Sair ");
       printf("\n ->");
       scanf("%d",&opera);
       switch (opera) {
           case 1:{
+            printf("\n Esta opção infelizmente não foi implementada.\n");
             break;
           }
           case 2:{
@@ -142,12 +156,9 @@ int main(void){
             break;
           }
           case 3:{
-            printf("\nForam aplicados dois filtros: Edge Detection e Blur! \n\nOs resultados foram criados em: grey_filtered_edge.pgm e rgb_filtered_blur.ppm :D \n");
+            printf("\nForam aplicados dois filtros:\n -> Edge Detection\n -> Blur\n\nOs resultados foram criados em: grey_filtered_edge.pgm e rgb_filtered_blur.pgm. \n");
 
-            double edge_kernel[3*3] = {-1.0, 0.0, 1.0, -2.0, 0.0, 2.0, -1.0, 0.0, 1.0};
-            double blur_kernel[3*3] = {1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0};
-            const double filter_params[2*4] = {1.0, 0.0, 1.0, 0.0, 1.0, 0.5, 9.0, 0.0};
-
+           
             GreyImage *imagegrey;
             GreyImage *grey_filtered_edge,*grey_filtered_blur;
             imagegrey=readGrey(nome);
@@ -168,6 +179,29 @@ int main(void){
   }
 
   case 3:{
+    printf("\n------------------------------\n");
+    printf("\nIntroduza o nome da imagem que quer processar: (tem de ser do tipo .pbm) Utilize: circle.pbm \n");
+    printf("->");
+    scanf("%s",nome);
+    while(opera!=2){
+      printf("\n Escolha a operação a realizar: ");
+      printf("\n 1 - Criar uma cópia");
+      printf("\n 2 - Sair ");
+      printf("\n ->");
+      scanf("%d",&opera);
+      switch (opera) {
+          case 1:{
+            BinImage *imagebin;
+            imagebin = readBin(nome);
+            writeBin("resultadoBIN.pbm", imagebin);
+            printf("\nA cópia da sua imagem binária foi criada em resultadoBIN.pbm.\n");
+
+            break;
+          }
+          case 3:{
+            exit(1);
+            
+          }
 
   break;
   }
@@ -175,10 +209,17 @@ int main(void){
   case 4:{
     exit(1);
   }
-
+    }
+  }
+  }
   }
   }
 
-  return 0;
+
+return 0;  
 }
-}
+
+
+
+
+

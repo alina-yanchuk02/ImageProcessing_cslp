@@ -1,3 +1,5 @@
+
+
 /**
  *  \file RGBImage.c
  *
@@ -35,14 +37,17 @@ ImageRGB *readRGB(char *filename)
 
     img = (ImageRGB*)malloc(sizeof(ImageRGB));
 
-       int c;
-       //check for comments
-       c = getc(fp);
-       while (c == '#') {
-       while (getc(fp) != '\n') ;
-            c = getc(fp);
-       }
+    int c;
+   
+         
+    c = getc(fp);
+    while (c == '#') {
+    while (getc(fp) != '\n') ;
+         c = getc(fp);
+    }
 
+    ungetc(c, fp);
+    
     fscanf(fp, "%d %d", &img->width, &img->height);
 
     fscanf(fp, "%d", &rgb_color);
@@ -55,8 +60,7 @@ ImageRGB *readRGB(char *filename)
 
     fread(img->pixels, 3 * img->width, img->height, fp);
 
-    printf("%i\n",img->width);
-    printf("%i\n",img->height );
+    
 
     fclose(fp);
 
@@ -90,7 +94,6 @@ void writeRGB(char *filename, ImageRGB *img)
 
     fclose(fp);
 }
-
 /**
  *  \brief RGB Pixel
  *
@@ -164,7 +167,6 @@ GreyImage *from_rgb_to_grey(ImageRGB *rgbimg){
 
 }
 
-<<<<<<< HEAD:src/RGBImage.c
 /**
  *  \brief Modificar pixel
  *
@@ -172,10 +174,6 @@ GreyImage *from_rgb_to_grey(ImageRGB *rgbimg){
  * Troca os valores do pixel pelos novos
  */
 void *change_pixel(ImageRGB *img,int x,int y,int red,int green,int blue){
-=======
-
-void *change_pixelRGB(ImageRGB *img,int x,int y,int red,int green,int blue){
->>>>>>> caaca95800a96f0355e0489c82179bff8c6e4724:RGBImage.c
     int position = ((img->width-1) * y + x)-1;
     img->pixels[position].red = red;
     img->pixels[position].green = green;
@@ -186,7 +184,8 @@ void *change_pixelRGB(ImageRGB *img,int x,int y,int red,int green,int blue){
 /**
  *  \brief Filtro RGB
  *
- *
+ *  Recebe uma matriz kernel e um parâmetro divisor e offset da matriz fitler_params, 
+ *  sendo a manipulação realizada com a conjunção destes valores mais o valor 1, que especifica uma matriz 3x3 ( no parâmetro Ks ) 
  */
 ImageRGB *filter_rgb(ImageRGB *img, double *K, int Ks, double divisor, double offset){
 
@@ -220,13 +219,8 @@ ImageRGB *filter_rgb(ImageRGB *img, double *K, int Ks, double divisor, double of
         else {cp[l]=cp[l];}
       }
 
-<<<<<<< HEAD:src/RGBImage.c
       change_pixel(img_filtered, ix, iy, (int)cp[0], (int)cp[1], (int)cp[2]);
 
-=======
-      change_pixelRGB(img_filtered, ix, iy, (int)cp[0], (int)cp[1], (int)cp[2]);
-        
->>>>>>> caaca95800a96f0355e0489c82179bff8c6e4724:RGBImage.c
     }
   }
   return img_filtered;
@@ -255,31 +249,43 @@ colorPixel *getPixelRGB_complet(ImageRGB *imageRGB,int x, int y){
  *
  * Recebe duas ImageRGB e um valor alpha
  * Retorna uma imagemRGB com o resultado
- * NOT WORKING
+ * 
  */
 ImageRGB *watermark(ImageRGB * imageA, ImageRGB * imageB, float alpha){
 	if(imageA->height != imageB->height || imageA->width != imageB->width){
 		printf("As imagens têm de ter o mesmo tamanho\n");
 		exit(1);
 	}
+  int red,green,blue;
 	float beta = 1 - alpha;
 	ImageRGB *watermark = (ImageRGB*)malloc(sizeof(ImageRGB));
   watermark->height = imageA->height;
   watermark->width = imageA->width;
   watermark->pixels = (colorPixel*)malloc(imageA->width * imageA->height * sizeof(colorPixel));
 
-	for(int height = 0; height < imageA->height; height++){
-		for(int width = 0; width < imageA->width; width++){
+	for(int x = 0; x < imageA->height; x++){
+		for(int y = 0; y < imageA->width; y++){
 
-		  colorPixel *pixelA = getPixelRGB_complet(imageA, height, width);
-			colorPixel *pixelB = getPixelRGB_complet(imageB, height, width);
-      int position = ((imageA->width-1) * width + height)-1;
-			watermark->pixels[position].red = (int)((float)pixelA->red*beta + (float)pixelB->red*alpha);
-			watermark->pixels[position].green = (int)((float)pixelA->green*beta + (float)pixelB->green*alpha);
-			watermark->pixels[position].blue = (int)((float)pixelA->blue*beta + (float)pixelB->blue*alpha);
-      printf("%i\n",watermark->pixels[position].red);
-      printf("%i\n",watermark->pixels[position].green);
-      printf("%i\n",watermark->pixels[position].blue);
+		  
+     
+			red = getPixelRGB(imageA,x,y,0)*beta + getPixelRGB(imageB,x,y,0)*alpha;
+			green = getPixelRGB(imageA,x,y,1)*beta + getPixelRGB(imageB,x,y,1)*alpha;
+		  blue = getPixelRGB(imageA,x,y,2)*beta + getPixelRGB(imageB,x,y,2)*alpha;
+     
+        
+      if (red>255) {red=255.0;}
+      else if (red<0.0) {red=0.0;}
+      else {red=red;}
+      
+      if (green>255) {green=255.0;}
+      else if (green<0.0) {green=0.0;}
+      else {green=green;}
+
+      if (blue>255) {blue=255.0;}
+      else if (blue<0.0) {blue=0.0;}
+      else {blue=blue;}
+      change_pixel(watermark, x, y, (int)red, (int)green, (int)blue);
+
   	}
 	}
   return watermark;

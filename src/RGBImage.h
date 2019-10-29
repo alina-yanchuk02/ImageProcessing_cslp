@@ -50,6 +50,7 @@ ImageRGB *filter_rgb(ImageRGB *img,double *K, int Ks, double divisor, double off
 void *put_pixel_unsafe(ImageRGB *img,int x,int y,int red,int green,int blue);
 ImageRGB *watermark(ImageRGB * imageA, ImageRGB * imageB, float alpha);
 colorPixel *getPixelRGB_complet(ImageRGB *imageRGB,int x, int y);
+void *change_pixel(ImageRGB *img,int x,int y,int red,int green,int blue);
 
 
 #endif

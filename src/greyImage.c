@@ -157,7 +157,8 @@ void *change_pixelGREY(GreyImage *img,int x,int y,int pixel){
 /**
  *  \brief Filtro Grey
  *
- *
+ * Recebe uma matriz kernel e um parâmetro divisor e offset da matriz fitler_params,
+ * sendo a manipulação realizada com a conjunção destes valores mais o valor 1, que especifica uma matriz 3x3 ( no parâmetro Ks ) 
  */
 GreyImage *filter_grey(GreyImage *img, double *K, int Ks, double divisor, double offset){
 

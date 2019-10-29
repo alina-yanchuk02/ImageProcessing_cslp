@@ -27,6 +27,7 @@
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Image processing in C
    </div>
+   <div id="projectbrief">Projeto nº2 da cadeira de CSLP.</div>
   </td>
  </tr>
  </tbody>
@@ -100,9 +101,8 @@ Functions</h2></td></tr>
 <tr class="memitem:a818202bb13739af05af78b52746ceafa"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_grey_image.html">GreyImage</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="grey_image_8h.html#a818202bb13739af05af78b52746ceafa">intensityFilterGrey</a> (<a class="el" href="struct_grey_image.html">GreyImage</a> *greyImage, int intensity)</td></tr>
 <tr class="memdesc:a818202bb13739af05af78b52746ceafa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Filtro de intensidade para imagem greyscale.  <a href="#a818202bb13739af05af78b52746ceafa">More...</a><br /></td></tr>
 <tr class="separator:a818202bb13739af05af78b52746ceafa"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a961c498f183e77f3375b3d2d9144cdab"><td class="memItemLeft" align="right" valign="top"><a id="a961c498f183e77f3375b3d2d9144cdab"></a>
-<a class="el" href="struct_grey_image.html">GreyImage</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="grey_image_8h.html#a961c498f183e77f3375b3d2d9144cdab">filter_grey</a> (<a class="el" href="struct_grey_image.html">GreyImage</a> *img, double *K, int Ks, double divisor, double offset)</td></tr>
-<tr class="memdesc:a961c498f183e77f3375b3d2d9144cdab"><td class="mdescLeft">&#160;</td><td class="mdescRight">Filtro Grey. <br /></td></tr>
+<tr class="memitem:a961c498f183e77f3375b3d2d9144cdab"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_grey_image.html">GreyImage</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="grey_image_8h.html#a961c498f183e77f3375b3d2d9144cdab">filter_grey</a> (<a class="el" href="struct_grey_image.html">GreyImage</a> *img, double *K, int Ks, double divisor, double offset)</td></tr>
+<tr class="memdesc:a961c498f183e77f3375b3d2d9144cdab"><td class="mdescLeft">&#160;</td><td class="mdescRight">Filtro Grey.  <a href="#a961c498f183e77f3375b3d2d9144cdab">More...</a><br /></td></tr>
 <tr class="separator:a961c498f183e77f3375b3d2d9144cdab"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a231e15883a6bd47b8bb3bcf71ae5bcdf"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="grey_image_8h.html#a231e15883a6bd47b8bb3bcf71ae5bcdf">change_pixelGREY</a> (<a class="el" href="struct_grey_image.html">GreyImage</a> *img, int x, int y, int pixel)</td></tr>
 <tr class="memdesc:a231e15883a6bd47b8bb3bcf71ae5bcdf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Modificar pixel.  <a href="#a231e15883a6bd47b8bb3bcf71ae5bcdf">More...</a><br /></td></tr>
@@ -155,6 +155,55 @@ Sandra Andrade </dd></dl>
 
 <p>Modificar pixel. </p>
 <p>Recebe as cordenadas de um pixel e os novos valores Troca os valores do pixel pelos novos </p>
+
+</div>
+</div>
+<a id="a961c498f183e77f3375b3d2d9144cdab"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a961c498f183e77f3375b3d2d9144cdab">&#9670;&nbsp;</a></span>filter_grey()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_grey_image.html">GreyImage</a>* filter_grey </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_grey_image.html">GreyImage</a> *&#160;</td>
+          <td class="paramname"><em>img</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double *&#160;</td>
+          <td class="paramname"><em>K</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>Ks</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>divisor</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>offset</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Filtro Grey. </p>
+<p>Recebe uma matriz kernel e um parâmetro divisor e offset da matriz fitler_params, sendo a manipulação realizada com a conjunção destes valores mais o valor 1, que especifica uma matriz 3x3 ( no parâmetro Ks ) </p>
 
 </div>
 </div>
@@ -305,7 +354,7 @@ Sandra Andrade </dd></dl>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="grey_image_8h.html">greyImage.h</a></li>
-    <li class="footer">Generated on Mon Oct 28 2019 23:19:10 for Image processing in C by
+    <li class="footer">Generated on Tue Oct 29 2019 16:10:03 for Image processing in C by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.13 </li>
   </ul>

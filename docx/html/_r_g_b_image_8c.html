@@ -27,6 +27,7 @@
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Image processing in C
    </div>
+   <div id="projectbrief">Projeto nº2 da cadeira de CSLP.</div>
   </td>
  </tr>
  </tbody>
@@ -99,9 +100,8 @@ Functions</h2></td></tr>
 <tr class="memitem:af22850ff2f2e96ba8e9179461de5069d"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_r_g_b_image_8c.html#af22850ff2f2e96ba8e9179461de5069d">change_pixel</a> (<a class="el" href="struct_image_r_g_b.html">ImageRGB</a> *img, int x, int y, int red, int green, int blue)</td></tr>
 <tr class="memdesc:af22850ff2f2e96ba8e9179461de5069d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Modificar pixel.  <a href="#af22850ff2f2e96ba8e9179461de5069d">More...</a><br /></td></tr>
 <tr class="separator:af22850ff2f2e96ba8e9179461de5069d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af52da38a565bb22439888fc4e7b734a9"><td class="memItemLeft" align="right" valign="top"><a id="af52da38a565bb22439888fc4e7b734a9"></a>
-<a class="el" href="struct_image_r_g_b.html">ImageRGB</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_r_g_b_image_8c.html#af52da38a565bb22439888fc4e7b734a9">filter_rgb</a> (<a class="el" href="struct_image_r_g_b.html">ImageRGB</a> *img, double *K, int Ks, double divisor, double offset)</td></tr>
-<tr class="memdesc:af52da38a565bb22439888fc4e7b734a9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Filtro RGB. <br /></td></tr>
+<tr class="memitem:af52da38a565bb22439888fc4e7b734a9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_image_r_g_b.html">ImageRGB</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_r_g_b_image_8c.html#af52da38a565bb22439888fc4e7b734a9">filter_rgb</a> (<a class="el" href="struct_image_r_g_b.html">ImageRGB</a> *img, double *K, int Ks, double divisor, double offset)</td></tr>
+<tr class="memdesc:af52da38a565bb22439888fc4e7b734a9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Filtro RGB.  <a href="#af52da38a565bb22439888fc4e7b734a9">More...</a><br /></td></tr>
 <tr class="separator:af52da38a565bb22439888fc4e7b734a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4e96cd8f31bc685646990e3d766a5087"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structcolor_pixel.html">colorPixel</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_r_g_b_image_8c.html#a4e96cd8f31bc685646990e3d766a5087">getPixelRGB_complet</a> (<a class="el" href="struct_image_r_g_b.html">ImageRGB</a> *imageRGB, int x, int y)</td></tr>
 <tr class="memdesc:a4e96cd8f31bc685646990e3d766a5087"><td class="mdescLeft">&#160;</td><td class="mdescRight">RGB Pixel.  <a href="#a4e96cd8f31bc685646990e3d766a5087">More...</a><br /></td></tr>
@@ -169,6 +169,55 @@ Sandra Andrade </dd></dl>
 
 <p>Modificar pixel. </p>
 <p>Recebe as cordenadas de um pixel e os novos valores Troca os valores do pixel pelos novos </p>
+
+</div>
+</div>
+<a id="af52da38a565bb22439888fc4e7b734a9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af52da38a565bb22439888fc4e7b734a9">&#9670;&nbsp;</a></span>filter_rgb()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_image_r_g_b.html">ImageRGB</a>* filter_rgb </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_image_r_g_b.html">ImageRGB</a> *&#160;</td>
+          <td class="paramname"><em>img</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double *&#160;</td>
+          <td class="paramname"><em>K</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>Ks</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>divisor</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>offset</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Filtro RGB. </p>
+<p>Recebe uma matriz kernel e um parâmetro divisor e offset da matriz fitler_params, sendo a manipulação realizada com a conjunção destes valores mais o valor 1, que especifica uma matriz 3x3 ( no parâmetro Ks ) </p>
 
 </div>
 </div>
@@ -358,7 +407,7 @@ Sandra Andrade </dd></dl>
 </div><div class="memdoc">
 
 <p>watermark </p>
-<p>Recebe duas <a class="el" href="struct_image_r_g_b.html" title="Defenição da estrutura da imagem rgb. ">ImageRGB</a> e um valor alpha Retorna uma imagemRGB com o resultado NOT WORKING </p>
+<p>Recebe duas <a class="el" href="struct_image_r_g_b.html" title="Defenição da estrutura da imagem rgb. ">ImageRGB</a> e um valor alpha Retorna uma imagemRGB com o resultado </p>
 
 </div>
 </div>
@@ -399,7 +448,7 @@ Sandra Andrade </dd></dl>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="_r_g_b_image_8c.html">RGBImage.c</a></li>
-    <li class="footer">Generated on Mon Oct 28 2019 23:19:10 for Image processing in C by
+    <li class="footer">Generated on Tue Oct 29 2019 16:10:03 for Image processing in C by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.13 </li>
   </ul>
