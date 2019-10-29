@@ -1,7 +1,7 @@
 GIT:   https://github.com/alina-yanchuk02/ImageProcessing_cslp.git
 
 
-Como correr o programa?
+Como correr o programa? (no dir src)
 
 make
 ./teste
